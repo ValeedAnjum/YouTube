@@ -1,7 +1,13 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import { IconButton, makeStyles, Button, Avatar } from "@material-ui/core";
+import {
+  IconButton,
+  makeStyles,
+  Button,
+  Avatar,
+  Grid,
+} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import MicIcon from "@material-ui/icons/Mic";
@@ -22,32 +28,25 @@ const Navbar = () => {
   return (
     <AppBar position="fixed" color="primary" className={classes.appbar}>
       <Toolbar>
-        <div style={{ display: "flex", width: "100%" }}>
-          <div style={{ display: "flex", flexGrow: "1" }}>
+        <Grid container>
+          <Grid xs={2} container>
             <IconButton>
               <MenuIcon />
             </IconButton>
             <div style={{ width: "80px" }}>
               <YouTubeIcon />
             </div>
-          </div>
+          </Grid>
           {/* menu and icon button */}
-          <div
-            style={{
-              display: "flex",
-              flexGrow: "2",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div style={{ display: "flex", width: "90%" }}>
+          <Grid xs={8} justify="center" container alignItems="center">
+            <Grid container xs={9}>
               <input
                 type="text"
                 style={{
                   borderRadius: "0",
                   border: "1px solid #cfcccc",
-                  width: "90%",
                   outline: "none",
+                  flexGrow: "1",
                 }}
                 placeholder="Search"
               />
@@ -63,20 +62,15 @@ const Navbar = () => {
               >
                 <SearchIcon style={{ color: "rgb(146 143 143)" }} />
               </Button>
-            </div>
-            <IconButton>
-              <MicIcon />
-            </IconButton>
-          </div>
+            </Grid>
+            <Grid item xs={1}>
+              <IconButton>
+                <MicIcon />
+              </IconButton>
+            </Grid>
+          </Grid>
           {/* searchbar and mice icon  */}
-          <div
-            style={{
-              display: "flex",
-              flexGrow: "2",
-              justifyContent: "flex-end",
-              alignItems: "center",
-            }}
-          >
+          <Grid container xs={2} justifyContent="flex-end" alignItems="center">
             <IconButton>
               <VideoCallIcon color="action" />
             </IconButton>
@@ -89,8 +83,8 @@ const Navbar = () => {
             <IconButton>
               <Avatar alt="user-name" src="./pictures/avatar.jpg" />
             </IconButton>
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       </Toolbar>
     </AppBar>
   );
