@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import {
@@ -14,7 +14,8 @@ import MicIcon from "@material-ui/icons/Mic";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 import AppsIcon from "@material-ui/icons/Apps";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import YouTubeIcon from "./Icon/Logo";
 const useStyle = makeStyles((theme) => {
   return {
@@ -23,13 +24,46 @@ const useStyle = makeStyles((theme) => {
     },
   };
 });
+const links = () => (
+  <Fragment>
+    <IconButton>
+      <AppsIcon color="action" />
+    </IconButton>
+    <IconButton>
+      <MoreVertIcon color="action" />
+    </IconButton>
+    <Button variant="outlined" color="default">
+      <AccountCircleIcon />
+      sign in
+    </Button>
+  </Fragment>
+);
+const authLinks = () => {
+  return (
+    <Fragment>
+      <IconButton>
+        <VideoCallIcon color="action" />
+      </IconButton>
+      <IconButton>
+        <AppsIcon color="action" />
+      </IconButton>
+      <IconButton>
+        <NotificationsIcon color="action" />
+      </IconButton>
+      <IconButton>
+        <Avatar alt="user-name" src="./pictures/avatar.jpg" />
+      </IconButton>
+    </Fragment>
+  );
+};
 const Navbar = () => {
+  const [auth, setAuth] = useState(true);
   const classes = useStyle();
   return (
     <AppBar position="fixed" color="primary" className={classes.appbar}>
       <Toolbar>
         <Grid container>
-          <Grid xs={2} container>
+          <Grid xs={2} container alignItems="center">
             <IconButton>
               <MenuIcon />
             </IconButton>
@@ -71,18 +105,7 @@ const Navbar = () => {
           </Grid>
           {/* searchbar and mice icon  */}
           <Grid container xs={2} justifyContent="flex-end" alignItems="center">
-            <IconButton>
-              <VideoCallIcon color="action" />
-            </IconButton>
-            <IconButton>
-              <AppsIcon color="action" />
-            </IconButton>
-            <IconButton>
-              <NotificationsIcon color="action" />
-            </IconButton>
-            <IconButton>
-              <Avatar alt="user-name" src="./pictures/avatar.jpg" />
-            </IconButton>
+            {auth ? authLinks() : links()}
           </Grid>
         </Grid>
       </Toolbar>
