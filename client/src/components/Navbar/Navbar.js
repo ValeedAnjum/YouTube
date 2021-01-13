@@ -7,6 +7,7 @@ import {
   Button,
   Avatar,
   Grid,
+  Hidden,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
@@ -62,8 +63,8 @@ const Navbar = () => {
   return (
     <AppBar position="fixed" color="primary" className={classes.appbar}>
       <Toolbar>
-        <Grid container>
-          <Grid xs={2} container alignItems="center">
+        <Grid container style={{ flexWrap: "nowrap" }}>
+          <Grid md={2} container alignItems="center">
             <IconButton>
               <MenuIcon />
             </IconButton>
@@ -72,39 +73,41 @@ const Navbar = () => {
             </div>
           </Grid>
           {/* menu and icon button */}
-          <Grid xs={8} justify="center" container alignItems="center">
-            <Grid container xs={9}>
-              <input
-                type="text"
-                style={{
-                  borderRadius: "0",
-                  border: "1px solid #cfcccc",
-                  outline: "none",
-                  flexGrow: "1",
-                }}
-                placeholder="Search"
-              />
-              <Button
-                variant="text"
-                color="default"
-                style={{
-                  backgroundColor: "#f8f8f8",
-                  borderRadius: "0",
-                  border: "1px solid #cfcccc",
-                  borderLeft: "none",
-                }}
-              >
-                <SearchIcon style={{ color: "rgb(146 143 143)" }} />
-              </Button>
+          <Hidden smDown>
+            <Grid md={8} justify="center" container alignItems="center">
+              <Grid container xs={9}>
+                <input
+                  type="text"
+                  style={{
+                    borderRadius: "0",
+                    border: "1px solid #cfcccc",
+                    outline: "none",
+                    flexGrow: "1",
+                  }}
+                  placeholder="Search"
+                />
+                <Button
+                  variant="text"
+                  color="default"
+                  style={{
+                    backgroundColor: "#f8f8f8",
+                    borderRadius: "0",
+                    border: "1px solid #cfcccc",
+                    borderLeft: "none",
+                  }}
+                >
+                  <SearchIcon style={{ color: "rgb(146 143 143)" }} />
+                </Button>
+              </Grid>
+              <Grid item xs={1}>
+                <IconButton>
+                  <MicIcon />
+                </IconButton>
+              </Grid>
             </Grid>
-            <Grid item xs={1}>
-              <IconButton>
-                <MicIcon />
-              </IconButton>
-            </Grid>
-          </Grid>
+          </Hidden>
           {/* searchbar and mice icon  */}
-          <Grid container xs={2} justifyContent="flex-end" alignItems="center">
+          <Grid container md={2} justify="flex-end" alignItems="center">
             {auth ? authLinks() : links()}
           </Grid>
         </Grid>
