@@ -18,6 +18,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import YouTubeIcon from "./Icon/Logo";
+import OptionalDrawer from "./OptionalDrawer";
 const useStyle = makeStyles((theme) => {
   return {
     appbar: {
@@ -42,15 +43,17 @@ const links = () => (
 const authLinks = () => {
   return (
     <Fragment>
-      <IconButton>
-        <VideoCallIcon color="action" />
-      </IconButton>
-      <IconButton>
-        <AppsIcon color="action" />
-      </IconButton>
-      <IconButton>
-        <NotificationsIcon color="action" />
-      </IconButton>
+      <Hidden xsDown>
+        <IconButton>
+          <VideoCallIcon color="action" />
+        </IconButton>
+        <IconButton>
+          <AppsIcon color="action" />
+        </IconButton>
+        <IconButton>
+          <NotificationsIcon color="action" />
+        </IconButton>
+      </Hidden>
       <IconButton>
         <Avatar alt="user-name" src="./pictures/avatar.jpg" />
       </IconButton>
@@ -107,10 +110,17 @@ const Navbar = () => {
             </Grid>
           </Hidden>
           {/* searchbar and mice icon  */}
-          <Grid container md={2} justify="flex-end" alignItems="center">
+          <Grid
+            container
+            md={2}
+            justify="flex-end"
+            alignItems="center"
+            style={{ flexWrap: "nowrap" }}
+          >
             {auth ? authLinks() : links()}
           </Grid>
         </Grid>
+        <OptionalDrawer />
       </Toolbar>
     </AppBar>
   );
