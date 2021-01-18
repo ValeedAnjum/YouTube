@@ -18,7 +18,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import YouTubeIcon from "./Icon/Logo";
-import OptionalDrawer from "./OptionalDrawer";
+import MobileDrawer from "./MobileDrawer";
 const useStyle = makeStyles((theme) => {
   return {
     appbar: {
@@ -62,13 +62,17 @@ const authLinks = () => {
 };
 const Navbar = () => {
   const [auth, setAuth] = useState(true);
+  const [mobileDrawer, setMobileDrawer] = useState(false);
   const classes = useStyle();
+  const setMobileDrawerState = () => {
+    setMobileDrawer(!mobileDrawer);
+  };
   return (
     <AppBar position="fixed" color="primary" className={classes.appbar}>
       <Toolbar>
         <Grid container style={{ flexWrap: "nowrap" }}>
-          <Grid md={2} container alignItems="center">
-            <IconButton>
+          <Grid md={2} item container alignItems="center">
+            <IconButton onClick={setMobileDrawerState}>
               <MenuIcon />
             </IconButton>
             <div style={{ width: "80px" }}>
@@ -77,8 +81,8 @@ const Navbar = () => {
           </Grid>
           {/* menu and icon button */}
           <Hidden smDown>
-            <Grid md={8} justify="center" container alignItems="center">
-              <Grid container xs={9}>
+            <Grid md={8} item justify="center" container alignItems="center">
+              <Grid container xs={9} item>
                 <input
                   type="text"
                   style={{
@@ -113,6 +117,7 @@ const Navbar = () => {
           <Grid
             container
             md={2}
+            item
             justify="flex-end"
             alignItems="center"
             style={{ flexWrap: "nowrap" }}
@@ -120,7 +125,12 @@ const Navbar = () => {
             {auth ? authLinks() : links()}
           </Grid>
         </Grid>
-        <OptionalDrawer />
+        <Fragment>
+          <MobileDrawer
+            mobileDrawer={mobileDrawer}
+            setMobileDrawerState={setMobileDrawerState}
+          />
+        </Fragment>
       </Toolbar>
     </AppBar>
   );
