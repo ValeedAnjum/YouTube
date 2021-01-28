@@ -15,6 +15,19 @@ import YouTubeIcon from "./Icon/Logo";
 const useStyles = makeStyles((theme) => {
   return {
     toolbar: theme.mixins.toolbar,
+    paper: {
+      overflow: "hidden",
+    },
+    list_root: {
+      width: "240px",
+      overflow: "auto",
+      "&::-webkit-scrollbar": {
+        width: "0.5em",
+      },
+      "&::-webkit-scrollbar-thumb": {
+        backgroundColor: "#d4d4d4",
+      },
+    },
   };
 });
 const MobileDrawer = ({ mobileDrawer, setMobileDrawerState }) => {
@@ -25,6 +38,7 @@ const MobileDrawer = ({ mobileDrawer, setMobileDrawerState }) => {
       anchor="left"
       open={mobileDrawer}
       onClose={setMobileDrawerState}
+      classes={{ paper: classes.paper }}
     >
       <div
         className={classes.toolbar}
@@ -45,13 +59,17 @@ const MobileDrawer = ({ mobileDrawer, setMobileDrawerState }) => {
           </ListItem>
         </List>
       </div>
-      <List style={{ width: "240px" }}>
-        <ListItem button>
-          <ListItemIcon>
-            <NotificationsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Home" />
-        </ListItem>
+      <List classes={{ root: classes.list_root }}>
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map(
+          (item, index) => (
+            <ListItem key={index} button>
+              <ListItemIcon>
+                <NotificationsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Home" />
+            </ListItem>
+          )
+        )}
       </List>
     </Drawer>
   );
